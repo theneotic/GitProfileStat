@@ -263,16 +263,19 @@ GitProfileStats/
 | `/cards/streak.svg`     | Contribution streak card                                                   |
 | `/cards/repository.svg` | Repository information card (requires `owner` and `repo` query parameters) |
 
-All endpoints accept the following optional query parameters for customisation:
+### Card Customization Parameters
 
-- `theme` – theme name (`light`, `dark`, `github`, `dracula`, `nord`)
-- `accent` – hex colour for accent elements
-- `background` – hex colour for card background
-- `border_radius` – integer pixel value
-- `hide_border` – `true`/`false`
-- `font_family` – custom font family string
-- `font_style` – `sans`, `serif`, `mono`, `rounded`
-- `mock` – `true` to force mock data (useful for demos)
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+| `theme` | `string` | `github` | Visual preset: `light`, `dark`, `github`, `dracula`, `nord` |
+| `accent` | `hex` | `#58a6ff` | Custom hex color for accents, graphs, and active highlights (e.g. `%2358a6ff`) |
+| `background` | `hex` | Theme default | Custom background color override for card container |
+| `border_radius` | `number` | `6` | Corner radius of the card SVG container in pixels (0–30) |
+| `hide_border` | `boolean` | `false` | Whether to omit the subtle 1px card container border |
+| `font_family` | `string` | System font stack | Custom font family definition string for text rendering |
+| `font_style` | `string` | `sans` | Font family preset: `sans`, `serif`, `mono`, `rounded` |
+| `mock` | `boolean` | `false` | When `true`, returns simulated mock metrics without calling GitHub API |
+| `locale` | `string` | `en` | Formatting locale for numbers and dates |
 
 ---
 
