@@ -9,7 +9,11 @@ import type { IGitHubRequest } from './validation.js';
 const userRepository = container.resolve<IUserRepository>('IUserRepository');
 
 export const optionalAuthGuard = (req: Request, res: Response, next: NextFunction): void => {
-  if (!req.cookies?.[SESSION_COOKIE_NAME]) {
+  const authHeader = req.headers.authorization;
+  const hasBearer = authHeader?.startsWith('Bearer ') && authHeader.slice(7).trim().length > 0;
+  const hasCookie = Boolean(req.cookies?.[SESSION_COOKIE_NAME]);
+
+  if (!hasBearer && !hasCookie) {
     next();
     return;
   }
