@@ -34,6 +34,7 @@ A lightweight, open‑source service that provides real‑time GitHub statistics
 - **Caching** of SVG responses (default 5 min) to respect GitHub rate limits
 - **REST API** – health check, user profile, combined statistics
 - **Rate limiting** – applied via Express middleware (helmet, cors, compression)
+- **Modern Auth Architecture** – Dual Bearer token and Partitioned CHIPS cookie support to prevent cross-origin redirect loops under strict browser privacy policies
 - **Full TypeScript** codebase with dependency injection (`tsyringe`)
 - **Monorepo** managed by Turborepo and pnpm workspaces
 
