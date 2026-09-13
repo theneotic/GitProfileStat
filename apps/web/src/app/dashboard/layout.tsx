@@ -58,6 +58,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         }
       } catch (err) {
         console.error('Session verification failed:', err);
+        clearStoredToken();
         router.push('/login');
       } finally {
         setLoading(false);
