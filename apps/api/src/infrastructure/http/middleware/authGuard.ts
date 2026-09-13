@@ -15,7 +15,9 @@ export interface IAuthenticatedRequest extends Request {
 const sessionService = container.resolve(SessionService);
 
 export const authGuard = (req: Request, _res: Response, next: NextFunction): void => {
-  const session = req.cookies?.[SESSION_COOKIE_NAME];
+  const authHeader = req.headers.authorization;
+  const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7).trim() : null;
+  const session = bearerToken || req.cookies?.[SESSION_COOKIE_NAME];
   const claims = sessionService.verifySession(session);
 
   if (!claims) {
