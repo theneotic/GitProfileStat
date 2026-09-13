@@ -6,14 +6,14 @@ A lightweight, open‑source service that provides real‑time GitHub statistics
 
 ## Project Badges
 
-[![License](https://img.shields.io/github/license/Ramsingh4656/GitProfileStats)](https://github.com/Ramsingh4656/GitProfileStats/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/package-json/v/Ramsingh4656/GitProfileStats)](https://github.com/Ramsingh4656/GitProfileStats/releases)
+[![License](https://img.shields.io/github/license/theneotic/GitProfileStat)](https://github.com/theneotic/GitProfileStat/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/package-json/v/theneotic/GitProfileStat)](https://github.com/theneotic/GitProfileStat/releases)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/Ramsingh4656/GitProfileStats/ci.yml?branch=main)](https://github.com/Ramsingh4656/GitProfileStats/actions)
-[![Stars](https://img.shields.io/github/stars/Ramsingh4656/GitProfileStats?style=social)](https://github.com/Ramsingh4656/GitProfileStats/stargazers)
-[![Forks](https://img.shields.io/github/forks/Ramsingh4656/GitProfileStats?style=social)](https://github.com/Ramsingh4656/GitProfileStats/network/members)
-[![Issues](https://img.shields.io/github/issues/Ramsingh4656/GitProfileStats)](https://github.com/Ramsingh4656/GitProfileStats/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/Ramsingh4656/GitProfileStats)](https://github.com/Ramsingh4656/GitProfileStats/commits/main)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/theneotic/GitProfileStat/ci.yml?branch=main)](https://github.com/theneotic/GitProfileStat/actions)
+[![Stars](https://img.shields.io/github/stars/theneotic/GitProfileStat?style=social)](https://github.com/theneotic/GitProfileStat/stargazers)
+[![Forks](https://img.shields.io/github/forks/theneotic/GitProfileStat?style=social)](https://github.com/theneotic/GitProfileStat/network/members)
+[![Issues](https://img.shields.io/github/issues/theneotic/GitProfileStat)](https://github.com/theneotic/GitProfileStat/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/theneotic/GitProfileStat)](https://github.com/theneotic/GitProfileStat/commits/main)
 
 ---
 
