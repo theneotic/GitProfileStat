@@ -19,6 +19,7 @@ const app = express();
 app.use(
   helmet({
     contentSecurityPolicy: false,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
   }),
 );
 app.use(cors({ origin: env.WEB_BASE_URL, credentials: true }));
