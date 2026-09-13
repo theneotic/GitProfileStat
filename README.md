@@ -290,13 +290,36 @@ GitProfileStats/
 | `GET`  | `/api/statistics?username={username}` | Returns combined statistics for the given GitHub username |
 | `GET`  | `/cards/*`                            | See _SVG Endpoints_ table above                           |
 
-All JSON responses follow the structure:
+All JSON responses follow standard envelopes:
 
+**Success Response:**
 ```json
-{ "success": true, "data": { … } }
+{
+  "success": true,
+  "data": {
+    "id": "usr_12345",
+    "username": "theneotic",
+    "name": "The Neotic",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/157010181",
+    "stats": {
+      "totalStars": 142,
+      "totalCommits": 1250,
+      "totalPRs": 84,
+      "totalIssues": 32,
+      "contributedTo": 15,
+      "rank": "A+"
+    }
+  }
+}
 ```
 
-Error responses use `{ "success": false, "error": "Message" }`.
+**Error Response:**
+```json
+{
+  "success": false,
+  "error": "Unauthorized: Missing or invalid authentication token"
+}
+```
 
 ---
 
