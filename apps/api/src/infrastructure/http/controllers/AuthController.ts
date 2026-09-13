@@ -110,7 +110,9 @@ export class AuthController {
         maxAge: SESSION_MAX_AGE_SECONDS * 1000,
         path: '/',
       });
-      res.redirect(`${env.WEB_BASE_URL}/login/callback`);
+      res.redirect(
+        `${env.WEB_BASE_URL}/login/callback?token=${encodeURIComponent(session)}`,
+      );
     } catch (error: unknown) {
       logger.error(
         { errorType: error instanceof Error ? error.name : typeof error },
