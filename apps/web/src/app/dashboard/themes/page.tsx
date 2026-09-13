@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { env } from '@/config/env';
 import { useRouter } from 'next/navigation';
+import { getAuthHeaders } from '@/utils/auth';
 import {
   Palette,
   Terminal,
@@ -185,6 +186,7 @@ export default function ThemeGalleryPage() {
       try {
         const apiBase = env.NEXT_PUBLIC_API_URL;
         const response = await fetch(`${apiBase}/api/v1/users/me`, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
 
@@ -235,6 +237,7 @@ export default function ThemeGalleryPage() {
         }
 
         const response = await fetch(endpoint, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
         if (!response.ok) {
@@ -378,9 +381,9 @@ export default function ThemeGalleryPage() {
 
       const response = await fetch(`${apiBase}/api/v1/users/settings`, {
         method: 'PUT',
-        headers: {
+        headers: getAuthHeaders({
           'Content-Type': 'application/json',
-        },
+        }),
         credentials: 'include',
         body: JSON.stringify(updatedSettings),
       });
