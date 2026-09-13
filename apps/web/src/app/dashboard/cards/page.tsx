@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { env } from '@/config/env';
 import { useRouter } from 'next/navigation';
+import { getAuthHeaders } from '@/utils/auth';
 import {
   CreditCard,
   RefreshCw,
@@ -195,6 +196,7 @@ export default function CardPreviewPage() {
       try {
         const apiBase = env.NEXT_PUBLIC_API_URL;
         const response = await fetch(`${apiBase}/api/v1/users/me`, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
 
@@ -297,6 +299,7 @@ export default function CardPreviewPage() {
 
         const url = `${apiBase}/api/cards/${type}.svg?${params.toString()}`;
         const response = await fetch(url, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
 
