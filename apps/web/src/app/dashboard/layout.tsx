@@ -5,6 +5,7 @@ import { env } from '@/config/env';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getAuthHeaders, clearStoredToken } from '@/utils/auth';
 import {
   Terminal,
   LayoutDashboard,
@@ -41,6 +42,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       try {
         const apiBase = env.NEXT_PUBLIC_API_URL;
         const response = await fetch(`${apiBase}/api/v1/users/me`, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
 
@@ -89,12 +91,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       const apiBase = env.NEXT_PUBLIC_API_URL;
       await fetch(`${apiBase}/api/v1/auth/logout`, {
         method: 'POST',
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
     } catch (err) {
       console.error('Logout error:', err);
+    } finally {
+      clearStoredToken();
+      router.push('/');
     }
-    router.push('/');
   };
 
   const navLinks = [
