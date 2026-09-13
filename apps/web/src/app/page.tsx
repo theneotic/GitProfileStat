@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { getStoredToken } from '@/utils/auth';
 import {
   Terminal,
   Sparkles,
@@ -132,9 +133,12 @@ export default function Home() {
 
   // Simulated live typing effect for hero username
   const [animatedUsername, setAnimatedUsername] = useState('o');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const targetUsername = 'octocat';
 
   useEffect(() => {
+    setIsLoggedIn(Boolean(getStoredToken()));
+
     let index = 1;
     const interval = setInterval(() => {
       if (index < targetUsername.length) {
@@ -202,7 +206,7 @@ export default function Home() {
               How It Works
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/theneotic/GitProfileStat"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors duration-200 flex items-center gap-1.5"
@@ -213,14 +217,25 @@ export default function Home() {
 
           {/* Header Action Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-sm font-semibold hover:text-white hover:border-white/20 px-4 py-2 rounded-full border border-white/10 bg-white/[0.02] flex items-center gap-2 hover:bg-white/[0.06] transition-all duration-200"
-              id="btn-signin"
-            >
-              <LogIn className="w-4 h-4 text-zinc-400" />
-              <span>Sign In</span>
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/dashboard"
+                className="text-sm font-semibold hover:text-white hover:border-white/20 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 flex items-center gap-2 hover:bg-violet-500/20 transition-all duration-200"
+                id="btn-dashboard"
+              >
+                <Terminal className="w-4 h-4 text-violet-400" />
+                <span>Dashboard</span>
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="text-sm font-semibold hover:text-white hover:border-white/20 px-4 py-2 rounded-full border border-white/10 bg-white/[0.02] flex items-center gap-2 hover:bg-white/[0.06] transition-all duration-200"
+                id="btn-signin"
+              >
+                <LogIn className="w-4 h-4 text-zinc-400" />
+                <span>Sign In</span>
+              </Link>
+            )}
             <Link
               href="/dashboard"
               className="text-sm font-semibold text-white px-5 py-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg shadow-violet-500/15 hover:shadow-violet-500/25 hover:scale-[1.02] active:scale-[0.98]"
@@ -1189,7 +1204,7 @@ export default function Home() {
               Dashboard
             </Link>
             <a
-              href="https://github.com"
+              href="https://github.com/theneotic/GitProfileStat"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors duration-200"
