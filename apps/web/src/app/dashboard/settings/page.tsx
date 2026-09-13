@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { env } from '@/config/env';
 import { useRouter } from 'next/navigation';
+import { getAuthHeaders } from '@/utils/auth';
 import {
   Palette,
   Sliders,
@@ -152,6 +153,7 @@ export default function SettingsPage() {
       try {
         const apiBase = env.NEXT_PUBLIC_API_URL;
         const response = await fetch(`${apiBase}/api/v1/users/me`, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
 
@@ -189,7 +191,7 @@ export default function SettingsPage() {
       const apiBase = env.NEXT_PUBLIC_API_URL;
       const response = await fetch(`${apiBase}/api/v1/users/github-token`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
         credentials: 'include',
         body: JSON.stringify({ token: patToken.trim() }),
       });
@@ -220,6 +222,7 @@ export default function SettingsPage() {
       const apiBase = env.NEXT_PUBLIC_API_URL;
       const response = await fetch(`${apiBase}/api/v1/users/github-token`, {
         method: 'DELETE',
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
 
@@ -249,9 +252,9 @@ export default function SettingsPage() {
       const apiBase = env.NEXT_PUBLIC_API_URL;
       const response = await fetch(`${apiBase}/api/v1/users/settings`, {
         method: 'PUT',
-        headers: {
+        headers: getAuthHeaders({
           'Content-Type': 'application/json',
-        },
+        }),
         credentials: 'include',
         body: JSON.stringify(settings),
       });
