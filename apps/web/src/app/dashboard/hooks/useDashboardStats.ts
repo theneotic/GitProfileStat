@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { env } from '@/config/env';
-import { getAuthHeaders } from '@/utils/auth';
+import { getAuthHeaders, clearStoredToken } from '@/utils/auth';
 import { CombinedStats, UserProfile } from '../types';
 
 export function useDashboardStats() {
@@ -73,6 +73,7 @@ export function useDashboardStats() {
         }
       } catch (err) {
         console.error('Session verification failed:', err);
+        clearStoredToken();
         router.push('/login');
       } finally {
         setLoading(false);
