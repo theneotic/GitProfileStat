@@ -187,8 +187,8 @@ GitProfileStats/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Ramsingh4656/GitProfileStats.git
-   cd GitProfileStats
+   git clone https://github.com/theneotic/GitProfileStat.git
+   cd GitProfileStat
    ```
 2. **Install dependencies** (pnpm workspaces)
    ```bash
@@ -388,11 +388,11 @@ Distributed under the **MIT License**. See the [LICENSE](LICENSE) file for detai
 
 ## Support
 
-- Open an issue on GitHub: [GitProfileStats/issues](https://github.com/Ramsingh4656/GitProfileStats/issues)
-- Join the discussion forum: [GitHub Discussions](https://github.com/Ramsingh4656/GitProfileStats/discussions)
+- Open an issue on GitHub: [GitProfileStat/issues](https://github.com/theneotic/GitProfileStat/issues)
+- Join the discussion forum: [GitHub Discussions](https://github.com/theneotic/GitProfileStat/discussions)
 
 ---
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Ramsingh4656/GitProfileStats&type=Date)](https://star-history.com/#Ramsingh4656/GitProfileStats&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=theneotic/GitProfileStat&type=Date)](https://star-history.com/#theneotic/GitProfileStat&Date)
