@@ -57,20 +57,20 @@ A lightweight, open‑source service that provides real‑time GitHub statistics
 
 ```mermaid
 flowchart TD
-    subgraph Frontend[Next.js (Vercel)]
-        FE[Dashboard UI]
+    subgraph Frontend ["Next.js (Vercel)"]
+        FE["Dashboard UI"]
     end
-    subgraph Backend[Express (Render)]
-        BE[API Server]
-        BE -->|/health| Health[Health Check]
-        BE -->|/auth/github| OAuth[GitHub OAuth]
-        BE -->|/api/v1/users/me| UserProfile[User Profile]
-        BE -->|/api/statistics| Stats[Combined Statistics]
-        BE -->|/cards/*.svg| SVG[SVG Card Renderer]
+    subgraph Backend ["Express (Render)"]
+        BE["API Server"]
+        BE -->|/health| Health["Health Check"]
+        BE -->|/auth/github| OAuth["GitHub OAuth"]
+        BE -->|/api/v1/users/me| UserProfile["User Profile"]
+        BE -->|/api/statistics| Stats["Combined Statistics"]
+        BE -->|/cards/*.svg| SVG["SVG Card Renderer"]
     end
-    GitHub[GitHub API] -->|OAuth, Data| OAuth
+    GitHub["GitHub API"] -->|OAuth, Data| OAuth
     GitHub -->|User data| BE
-    FE -->|fetch| Backend
+    FE -->|fetch| BE
     style Frontend fill:#1e3a8a,color:#fff
     style Backend fill:#064e3b,color:#fff
 ```
