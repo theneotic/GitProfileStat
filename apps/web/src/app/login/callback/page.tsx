@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Loader2, AlertCircle, CheckCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { setStoredToken } from '@/utils/auth';
 
 function CallbackHandler() {
   const router = useRouter();
@@ -13,28 +14,26 @@ function CallbackHandler() {
 
   useEffect(() => {
     const error = searchParams.get('error');
+    const token = searchParams.get('token');
 
-    const timer = setTimeout(() => {
-      if (error) {
-        setStatus('error');
-        setErrorMessage(decodeURIComponent(error));
-      } else {
-        setStatus('success');
-      }
-    }, 0);
-
-    let redirectTimer: NodeJS.Timeout;
-    if (!error) {
-      redirectTimer = setTimeout(() => {
-        router.push('/dashboard');
-      }, 1500);
+    if (error) {
+      setStatus('error');
+      setErrorMessage(decodeURIComponent(error));
+      return;
     }
 
+    if (token) {
+      setStoredToken(token);
+    }
+
+    setStatus('success');
+
+    const redirectTimer = setTimeout(() => {
+      router.push('/dashboard');
+    }, 1500);
+
     return () => {
-      clearTimeout(timer);
-      if (redirectTimer) {
-        clearTimeout(redirectTimer);
-      }
+      clearTimeout(redirectTimer);
     };
   }, [searchParams, router]);
 
