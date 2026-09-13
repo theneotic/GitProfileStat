@@ -18,7 +18,14 @@ function CallbackHandler() {
 
     if (error) {
       setStatus('error');
-      setErrorMessage(decodeURIComponent(error));
+      const decoded = decodeURIComponent(error);
+      const friendlyMessage =
+        decoded === 'auth_failed'
+          ? 'GitHub authentication could not be completed. Please verify your connection and try again.'
+          : decoded === 'missing_code'
+          ? 'GitHub authorization code was missing. Please initiate the sign in flow again.'
+          : decoded;
+      setErrorMessage(friendlyMessage);
       return;
     }
 
