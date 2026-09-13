@@ -109,6 +109,7 @@ export class AuthController {
         sameSite: isSecure ? 'none' : 'lax',
         maxAge: SESSION_MAX_AGE_SECONDS * 1000,
         path: '/',
+        ...(isSecure ? { partitioned: true } : {}),
       });
       res.redirect(
         `${env.WEB_BASE_URL}/login/callback?token=${encodeURIComponent(session)}`,
