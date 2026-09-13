@@ -75,6 +75,32 @@ flowchart TD
     style Backend fill:#064e3b,color:#fff
 ```
 
+### Authentication Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as User Browser
+    participant FE as Next.js Web (Vercel)
+    participant BE as Express API (Render)
+    participant GH as GitHub OAuth
+
+    User->>FE: Click "Login with GitHub"
+    FE->>BE: Redirect to /auth/github
+    BE->>GH: Redirect to GitHub Authorize
+    GH-->>User: Present Authorization Prompt
+    User->>GH: Authorize Application
+    GH->>BE: Callback with Authorization Code
+    BE->>GH: Exchange Code for Access Token
+    GH-->>BE: Return GitHub Access Token
+    BE->>BE: Create Session & Sign JWT
+    BE-->>FE: Redirect /login/callback?token=JWT + Set-Cookie
+    FE->>FE: Persist Token in localStorage & 1st-Party Cookie
+    FE->>BE: Fetch /api/v1/users/me (Authorization: Bearer JWT)
+    BE-->>FE: Return User Profile & Dashboard Data
+    FE-->>User: Display Active Dashboard
+```
+
 ---
 
 ## Tech Stack
