@@ -1,6 +1,11 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Terminal, Sparkles, KeyRound } from 'lucide-react';
 import { env } from '@/config/env';
+import { getStoredToken } from '@/utils/auth';
 
 const Github = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -18,6 +23,13 @@ const Github = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function LoginPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (getStoredToken()) {
+      router.replace('/dashboard');
+    }
+  }, [router]);
   return (
     <div className="relative min-h-screen bg-[#030014] text-zinc-100 flex flex-col justify-center items-center px-6 selection:bg-violet-500/30 selection:text-violet-200">
       {/* Background glow spots */}
@@ -72,7 +84,7 @@ export default function LoginPage() {
             <span>Secure encryption</span>
           </span>
           <a
-            href="https://github.com"
+            href="https://github.com/theneotic/GitProfileStat"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-zinc-300 transition-colors"
