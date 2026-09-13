@@ -1,8 +1,10 @@
 /**
  * Centralized Web Client Environment Configuration
  */
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+
 export const env = {
-  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000',
+  NEXT_PUBLIC_API_URL: rawApiUrl.replace(/\/+$/, ''),
 } as const;
 
 // Warn at runtime if production environment is missing critical variables
