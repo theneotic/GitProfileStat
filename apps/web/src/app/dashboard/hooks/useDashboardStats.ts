@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { env } from '@/config/env';
+import { getAuthHeaders } from '@/utils/auth';
 import { CombinedStats, UserProfile } from '../types';
 
 export function useDashboardStats() {
@@ -21,6 +22,7 @@ export function useDashboardStats() {
     try {
       const apiBase = env.NEXT_PUBLIC_API_URL;
       const response = await fetch(`${apiBase}/api/statistics?username=${username}`, {
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
 
@@ -53,6 +55,7 @@ export function useDashboardStats() {
       try {
         const apiBase = env.NEXT_PUBLIC_API_URL;
         const response = await fetch(`${apiBase}/api/v1/users/me`, {
+          headers: getAuthHeaders(),
           credentials: 'include',
         });
 
