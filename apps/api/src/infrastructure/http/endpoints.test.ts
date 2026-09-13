@@ -523,12 +523,17 @@ describe('API Endpoints', () => {
         .query({ code: 'valid-oauth-code' });
 
       expect(callbackResponse.status).toBe(302);
+      expect(callbackResponse.headers.location).toContain('token=');
       const sessionCookie = callbackResponse.headers['set-cookie']
         ?.find((cookie) => cookie.startsWith('gitprofilestats_session='))
         ?.split(';')[0];
       expect(sessionCookie).toBeDefined();
 
-      // 2. Dashboard requests user profile
+      const callbackUrl = new URL(callbackResponse.headers.location, 'http://localhost');
+      const bearerToken = callbackUrl.searchParams.get('token');
+      expect(bearerToken).toBeTruthy();
+
+      // 2. Dashboard requests user profile via Cookie
       const profileResponse = await request(app)
         .get('/api/v1/users/me')
         .set('Cookie', sessionCookie as string);
@@ -536,6 +541,14 @@ describe('API Endpoints', () => {
       expect(profileResponse.status).toBe(200);
       expect(profileResponse.body.data.username).toBe('demo');
       expect(profileResponse.body.data.hasGithubToken).toBe(true);
+
+      // 2b. Dashboard requests user profile via Authorization: Bearer header
+      const profileBearerResponse = await request(app)
+        .get('/api/v1/users/me')
+        .set('Authorization', `Bearer ${bearerToken}`);
+
+      expect(profileBearerResponse.status).toBe(200);
+      expect(profileBearerResponse.body.data.username).toBe('demo');
 
       // 3. Dashboard requests statistics using the session cookie
       mockFetch.mockClear();
