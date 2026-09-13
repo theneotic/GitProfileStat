@@ -104,6 +104,12 @@ export interface UserProfile {
   email: string | null;
   avatarUrl: string;
   hasGithubToken?: boolean;
+  settings?: {
+    preferredTheme?: string;
+    defaultCardStyle?: string;
+    languageSorting?: string;
+    defaultCardVisibility?: Record<string, boolean>;
+  };
 }
 
 export const LANGUAGE_COLORS: Record<string, string> = {
