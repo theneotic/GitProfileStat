@@ -13,6 +13,7 @@ import { cardRoutes } from './infrastructure/http/routes/cardRoutes.js';
 import { errorHandler } from './infrastructure/http/middleware/errorHandler.js';
 import { container } from './config/container.js';
 import { HealthController } from './infrastructure/http/controllers/HealthController.js';
+import { SESSION_COOKIE_NAME } from './application/services/SessionService.js';
 
 const app = express();
 
@@ -31,7 +32,10 @@ app.use(express.static(path.resolve(process.cwd(), 'public')));
 
 // Request logger middleware
 app.use((req, res, next) => {
-  logger.info({ method: req.method, path: req.path }, 'Incoming request');
+  const hasBearer = Boolean(req.headers.authorization?.startsWith('Bearer '));
+  const hasCookie = Boolean(req.cookies?.[SESSION_COOKIE_NAME]);
+  const authMode = hasBearer ? 'bearer' : hasCookie ? 'cookie' : 'anonymous';
+  logger.info({ method: req.method, path: req.path, authMode }, 'Incoming request');
   next();
 });
 
