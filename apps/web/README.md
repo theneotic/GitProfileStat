@@ -59,3 +59,15 @@ To ensure seamless operation across disparate apex domains (e.g. `vercel.app` an
    - `getAuthHeaders()` generates `{ Authorization: 'Bearer <token>' }` which is injected into all requests to `/api/v1/users/me`, `/api/statistics`, and settings mutations.
 4. **Session Termination**:
    - On explicit logout or 401 Unauthorized errors, `clearStoredToken()` removes credentials and transitions the user to `/login`.
+
+## Theme Engine & Design Tokens
+
+The dashboard incorporates a modern glassmorphism design system built on Tailwind CSS:
+
+- **Built-in Presets**:
+  - `dark`: Deep canvas background (`#0d1117`) with blue/cyan accents (`#58a6ff`).
+  - `light`: Clean paper background (`#ffffff`) with rich blue accents (`#0969da`).
+  - `github`: Canonical GitHub dark theme (`#161b22`) with subtle borders (`#30363d`).
+  - `dracula`: Vampiric purple palette (`#282a36`) with vibrant pink accents (`#ff79c6`).
+  - `nord`: Arctic blue palette (`#2e3440`) with cool frost accents (`#88c0d0`).
+- **Surface Elevation**: Cards and interactive panels utilize `backdrop-blur-md bg-white/5 border border-white/10` with smooth micro-interactions.
