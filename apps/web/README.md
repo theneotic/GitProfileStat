@@ -46,3 +46,16 @@ apps/web/src/app/
    ├─ activity/page.tsx         # Contribution streak & event timeline
    └─ repositories/page.tsx     # Repository metrics and language distribution
 ```
+
+## Client-Side Dual Authentication
+
+To ensure seamless operation across disparate apex domains (e.g. `vercel.app` and `duckdns.org` / `onrender.com`), the web app implements dual-mode authentication via `src/utils/auth.ts`:
+
+1. **Token Extraction**:
+   - The OAuth callback route `/login/callback?token=...` extracts the JWT query parameter emitted by the backend.
+2. **First-Party Storage**:
+   - `setStoredToken(token)` synchronizes the credential into `localStorage` (`gitprofilestats_token`) and sets a first-party cookie.
+3. **Header Injection**:
+   - `getAuthHeaders()` generates `{ Authorization: 'Bearer <token>' }` which is injected into all requests to `/api/v1/users/me`, `/api/statistics`, and settings mutations.
+4. **Session Termination**:
+   - On explicit logout or 401 Unauthorized errors, `clearStoredToken()` removes credentials and transitions the user to `/login`.
