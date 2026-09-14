@@ -17,6 +17,7 @@ function CallbackHandler() {
     const token = searchParams.get('token');
 
     if (error) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus('error');
       const decoded = decodeURIComponent(error);
       const friendlyMessage =

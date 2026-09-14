@@ -70,6 +70,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   // Close dropdowns on route change or ESC
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProfileDropdownOpen(false);
     setNotificationsOpen(false);
     setMobileSidebarOpen(false);
