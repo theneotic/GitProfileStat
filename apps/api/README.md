@@ -61,6 +61,23 @@ To shield downstream GitHub GraphQL and REST endpoints from exhaustion:
    - **Upstash Redis**: Distributed caching with automatic TTL eviction for multi-instance deployments.
    - **In-Memory Cache**: In-process store used automatically when Redis environment variables are absent.
 
+## Request Lifecycle
+
+```mermaid
+flowchart LR
+    Req["Incoming HTTP Request"] --> Sec["Security & CORS (Helmet)"]
+    Sec --> Auth{"Protected Route?"}
+    Auth -- "Yes" --> Guard["authGuard (Bearer / Cookie)"]
+    Auth -- "No" --> Ctrl["Route Controller"]
+    Guard --> Ctrl
+    Ctrl --> Cache{"Cache Hit?"}
+    Cache -- "Yes" --> Resp["Cached SVG/JSON"]
+    Cache -- "No" --> Svc["GitHub & User Services"]
+    Svc --> Render["SVG Template Engine"]
+    Render --> Store["Save to Upstash / Memory"]
+    Store --> Resp
+```
+
 ## Documentation
 
 See the root [README.md](../../README.md) and [DEPLOYMENT.md](../../DEPLOYMENT.md) for full deployment instructions, parameters, and customization guides.
