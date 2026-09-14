@@ -9,6 +9,7 @@
     "composite": false,
     "declaration": false,
     "declarationMap": false,
+    "skipLibCheck": true,
     "baseUrl": "."
   },
   "include": ["src/**/*.ts"],
