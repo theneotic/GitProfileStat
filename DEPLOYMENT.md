@@ -190,15 +190,14 @@ Environment variables keep secret values (API keys, database URLs) out of the so
 # Upstash Redis
 
 1. **Create an Upstash account** – Go to https://upstash.com and sign up.
-2. **Create a Redis database** – Click **Create Database**, choose _Redis_ and the free tier.
-3. **Copy the Redis URL** – In the database view, click **Show connection details** → copy the `REDIS_URL`.
-4. **Paste into `.env.local`** → set `UPSTASH_REDIS_URL`.
-5. **Test the connection** – Run:
-   ```powershell
-   npm install -g redis-cli
-   redis-cli -u $env:UPSTASH_REDIS_URL ping
-   ```
-   Should return `PONG`.
+2. **Create a Redis database** – Click **Create Database**, choose _Redis_ and select the regional free tier.
+3. **Copy REST Credentials** – In the database details tab, scroll to the **REST API** section and copy:
+   - `UPSTASH_REDIS_REST_URL`
+   - `UPSTASH_REDIS_REST_TOKEN`
+4. **Paste into `.env` / Render** – Set both `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
+5. **Caching Behavior**:
+   - Card SVGs and user statistics are automatically cached for 300 seconds (5 minutes) to respect GitHub API rate limits.
+   - If Redis credentials are omitted in local development, the backend gracefully falls back to `InMemoryResponseCache`.
 
 ---
 
