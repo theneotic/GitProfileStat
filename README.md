@@ -375,6 +375,21 @@ The CI pipeline runs the test suite on every push.
 
 ---
 
+## Troubleshooting
+
+### Cross-Origin Authentication Issues
+- **Symptom**: Browser redirects to `/login` immediately after displaying "Login Successful".
+- **Cause**: Third-party cookie blocking in modern browsers (Chrome 115+, Safari ITP).
+- **Solution**: The application uses dual-credential authentication. When the backend redirects to `/login/callback?token=...`, the frontend stores the token in `localStorage` and attaches `Authorization: Bearer <token>` to all API requests, bypassing third-party cookie restrictions.
+
+### Port Conflicts
+- Default backend port is `4000`, frontend port is `3000`. If either port is occupied, specify alternative ports via `PORT=4001` or `next dev -p 3001` and update `NEXT_PUBLIC_API_URL` and `WEB_BASE_URL` accordingly.
+
+### Rate Limiting
+- Unauthenticated GitHub API requests are subject to strict IP rate limits (60 req/hr). Supply a `GITHUB_TOKEN` personal access token in `apps/api/.env` to increase the limit to 5,000 req/hr.
+
+---
+
 ## Performance
 
 - **Caching** – SVG responses are cached for 5 minutes using Upstash Redis.
