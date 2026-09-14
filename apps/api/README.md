@@ -38,6 +38,18 @@ The SVG engine generates self-contained vector graphics using pure TypeScript st
 | `topContributedCard` | `/cards/top-contributed.svg` | Highlighted external repositories and open-source contributions |
 | `trophiesCard` | `/cards/trophies.svg` | Milestone badges and achievement trophies |
 
+## Dependency Injection (`tsyringe`)
+
+The API utilizes `tsyringe` for inversion of control, allowing seamless switching between local development mocks and production cloud infrastructure:
+
+| Token | Production Adapter | Fallback / Local Adapter |
+| ----- | ------------------ | ------------------------ |
+| `DatabasePool` | `pg.Pool` (Neon PostgreSQL SSL) | Not registered |
+| `IUserRepository` | `PostgresUserRepository` | `InMemoryUserRepository` |
+| `UpstashRedis` | `@upstash/redis` REST client | Not registered |
+| `ResponseCache` | `UpstashResponseCache` | `InMemoryResponseCache` |
+| `SessionService` | `SessionService` (Singleton) | `SessionService` (Singleton) |
+
 ## Documentation
 
 See the root [README.md](../../README.md) and [DEPLOYMENT.md](../../DEPLOYMENT.md) for full deployment instructions, parameters, and customization guides.
