@@ -38,6 +38,33 @@ flowchart LR
 - **Cache → Upstash** – Managed Redis cache for fast data.
 - **Auth → GitHub** – OAuth app that lets users log in with their GitHub account.
 
+### Production Request Pipeline
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client as Web Browser
+    participant Vercel as Vercel (Next.js)
+    participant Render as Render (API Service)
+    participant Upstash as Upstash Redis
+    participant Neon as Neon PostgreSQL
+    participant GitHub as GitHub API
+
+    Client->>Vercel: Load Dashboard App
+    Client->>Render: Request /api/statistics?username=...
+    Render->>Upstash: Check Cached SVG / Metrics
+    alt Cache Hit
+        Upstash-->>Render: Return Cached JSON/SVG
+    else Cache Miss
+        Render->>GitHub: Query GraphQL & REST Stats
+        GitHub-->>Render: Return User Statistics
+        Render->>Neon: Read/Update User Settings
+        Neon-->>Render: Stored Preferences
+        Render->>Upstash: Cache Response (TTL 300s)
+    end
+    Render-->>Client: Return Rendered Stats
+```
+
 ---
 
 # What You Need
