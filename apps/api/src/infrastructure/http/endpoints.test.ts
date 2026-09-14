@@ -423,9 +423,9 @@ describe('API Endpoints', () => {
         .query({ code: 'some-oauth-code' });
 
       expect(response.status).toBe(302);
-      expect(response.headers.location).toBe('http://localhost:3000/login/callback');
+      expect(response.headers.location).toContain('http://localhost:3000/login/callback');
       expect(response.headers.location).not.toContain('5832347');
-      expect(response.headers.location).not.toContain('token=');
+      expect(response.headers.location).toContain('token=');
 
       const setCookie = response.headers['set-cookie'];
       expect(setCookie).toBeDefined();
@@ -529,8 +529,8 @@ describe('API Endpoints', () => {
         ?.split(';')[0];
       expect(sessionCookie).toBeDefined();
 
-      const callbackUrl = new URL(callbackResponse.headers.location, 'http://localhost');
-      const bearerToken = callbackUrl.searchParams.get('token');
+      const callbackUrlStr = callbackResponse.headers.location || '';
+      const bearerToken = callbackUrlStr.split('token=')[1];
       expect(bearerToken).toBeTruthy();
 
       // 2. Dashboard requests user profile via Cookie

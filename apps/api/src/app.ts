@@ -48,6 +48,11 @@ app.use((req, res, next) => {
 const healthController = container.resolve(HealthController);
 app.get('/health', healthController.check);
 
+// Root route redirect to frontend
+app.get('/', (req, res) => {
+  res.redirect(env.WEB_BASE_URL || 'https://github.com/theneotic/GitProfileStat');
+});
+
 // API Routes
 app.use('/api/v1', routes);
 app.use('/api', githubRoutes);
