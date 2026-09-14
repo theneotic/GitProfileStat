@@ -8,22 +8,37 @@ if (process.env.NODE_ENV !== 'test') {
   dotenv.config(); // fallback to local .env
 }
 
+/**
+ * Validated runtime configuration schema for the Express API.
+ */
 const envSchema = z
   .object({
+    /** Node runtime environment */
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+    /** HTTP listening port */
     PORT: z.coerce.number().default(4000),
+    /** Frontend base URL without trailing slash (used for CORS and OAuth redirects) */
     WEB_BASE_URL: z
       .string()
       .default('http://localhost:3000')
       .transform((val) => val.replace(/\/+$/, '')),
+    /** Pino logger log level */
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
+    /** GitHub OAuth App Client ID */
     GITHUB_CLIENT_ID: z.string(),
+    /** GitHub OAuth App Client Secret */
     GITHUB_CLIENT_SECRET: z.string(),
+    /** GitHub OAuth Callback URL */
     GITHUB_CALLBACK_URL: z.string(),
+    /** GitHub Personal Access Token for rate limit headroom */
     GITHUB_TOKEN: z.string(),
+    /** 32+ char secret for JWT and session signing */
     SESSION_SECRET: z.string().min(32),
+    /** Neon PostgreSQL connection URI */
     DATABASE_URL: z.string().min(1).optional(),
+    /** Upstash Redis REST endpoint */
     UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+    /** Upstash Redis REST bearer token */
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
   })
   .superRefine((values, context) => {
