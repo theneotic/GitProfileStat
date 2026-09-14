@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Terminal, Home, LayoutDashboard, HelpCircle } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: '404 - Page Not Found | GitProfileStats',
+  description: 'The requested route or commit could not be found.',
+};
 
 export default function NotFound() {
   return (
