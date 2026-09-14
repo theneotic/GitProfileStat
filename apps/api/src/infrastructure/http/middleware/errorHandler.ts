@@ -1,9 +1,9 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
 import { DomainError } from '../../../domain/errors/DomainError.js';
 import { logger } from '../../../config/logger.js';
 
-export const errorHandler = (
+export const errorHandler: ErrorRequestHandler = (
   error: Error,
   req: Request,
   res: Response,
