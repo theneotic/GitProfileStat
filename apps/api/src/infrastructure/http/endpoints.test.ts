@@ -580,4 +580,17 @@ describe('API Endpoints', () => {
       expect(clearCookie?.some((cookie) => cookie.includes('gitprofilestats_session=;'))).toBe(true);
     });
   });
+
+  describe('GET /health', () => {
+    it('returns system health, version, uptime, and memory telemetry', async () => {
+      const response = await request(app).get('/health');
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty('status');
+      expect(response.body.version).toBe('1.0.1');
+      expect(typeof response.body.uptime).toBe('number');
+      expect(typeof response.body.timestamp).toBe('string');
+      expect(response.body).toHaveProperty('services');
+      expect(response.body).toHaveProperty('system');
+    });
+  });
 });
