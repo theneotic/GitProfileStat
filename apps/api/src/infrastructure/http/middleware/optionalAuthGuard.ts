@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction, RequestHandler } from 'express';
 import { container } from '../../../config/container.js';
 import type { IUserRepository } from '../../../domain/interfaces/IUserRepository.js';
 import { AuthenticationError } from '../../../domain/errors/DomainError.js';
@@ -8,7 +8,7 @@ import type { IGitHubRequest } from './validation.js';
 
 const userRepository = container.resolve<IUserRepository>('IUserRepository');
 
-export const optionalAuthGuard = (req: Request, res: Response, next: NextFunction): void => {
+export const optionalAuthGuard: RequestHandler = (req: Request, res: Response, next: NextFunction): void => {
   const authHeader = req.headers.authorization;
   const hasBearer = authHeader?.startsWith('Bearer ') && authHeader.slice(7).trim().length > 0;
   const hasCookie = Boolean(req.cookies?.[SESSION_COOKIE_NAME]);
