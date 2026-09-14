@@ -56,4 +56,5 @@ app.use('/api', cardRoutes);
 // Centralized error handling
 app.use(errorHandler);
 
+export default app;
 export { app };
