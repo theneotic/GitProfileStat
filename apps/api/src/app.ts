@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { type Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -15,7 +15,7 @@ import { container } from './config/container.js';
 import { HealthController } from './infrastructure/http/controllers/HealthController.js';
 import { SESSION_COOKIE_NAME } from './application/services/SessionService.js';
 
-const app = express();
+const app: Express = express();
 
 app.use(
   helmet({
