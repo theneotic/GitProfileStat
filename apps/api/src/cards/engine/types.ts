@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+/**
+ * Visual styling theme configuration for SVG card rendering.
+ */
 export interface Theme {
   name: string;
   background: string;
@@ -13,16 +16,29 @@ export interface Theme {
   fontFamily?: string;
 }
 
+/**
+ * Standard customization options parsed from request query parameters.
+ */
 export interface CardOptions {
+  /** Theme name identifier (e.g. 'light', 'dark', 'github', 'dracula', 'nord') */
   theme?: string;
+  /** Custom hex color code for accent highlights */
   accent?: string;
+  /** Custom hex color code for card background */
   background?: string;
+  /** Corner radius in pixels */
   borderRadius?: number;
+  /** When true, omits the outer stroke border */
   hideBorder?: boolean;
+  /** Custom CSS font-family string */
   fontFamily?: string;
+  /** Typography style preset ('sans', 'serif', 'mono', 'rounded') */
   fontStyle?: string;
 }
 
+/**
+ * Low-level root SVG document options.
+ */
 export interface SvgDocumentOptions {
   width: number | string;
   height: number | string;
