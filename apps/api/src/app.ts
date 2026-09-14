@@ -17,8 +17,13 @@ import { SESSION_COOKIE_NAME } from './application/services/SessionService.js';
 
 const app: Express = express();
 
+// Resolve Helmet CJS/ESM interop under TypeScript NodeNext
+const helmetMiddleware = (typeof helmet === 'function' ? helmet : ((helmet as any).default ?? helmet)) as (
+  options?: any,
+) => express.RequestHandler;
+
 app.use(
-  helmet({
+  helmetMiddleware({
     contentSecurityPolicy: false,
     crossOriginResourcePolicy: { policy: 'cross-origin' },
   }),
