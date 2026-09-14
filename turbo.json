@@ -1,7 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local", "**/.env"],
-  "globalEnv": ["NODE_ENV", "DATABASE_URL", "REDIS_URL"],
+  "globalEnv": [
+    "NODE_ENV",
+    "DATABASE_URL",
+    "REDIS_URL",
+    "WEB_BASE_URL",
+    "NEXT_PUBLIC_API_URL",
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN"
+  ],
   "ui": "tui",
   "tasks": {
     "build": {
