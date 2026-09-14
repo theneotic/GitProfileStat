@@ -177,11 +177,11 @@ Environment variables keep secret values (API keys, database URLs) out of the so
 3. **Create a Database** – In the project view, click **Create Database**. The default name `postgres` is fine.
 4. **Get the Connection String** – In the database details panel, click **Connection string** → _Copy_.
 5. **Paste into `.env.local`** → set `DATABASE_URL` to the copied value.
-6. **Test the connection** – Back in PowerShell, run:
-   ```powershell
-   npx prisma db connect --url "$env:DATABASE_URL"
+6. **Initialize the Database Schema** – Open the Neon **SQL Editor** in your browser and run `apps/api/migrations/001_create_users.sql`, or execute via `psql`:
+   ```bash
+   psql "$DATABASE_URL" -f apps/api/migrations/001_create_users.sql
    ```
-   You should see `Connection successful`.
+   This provisions the `users` table, JSONB settings column, and the `users_username_lower_idx` index.
 
 > **Warning**: Do not share this URL publicly; it contains your password.
 
