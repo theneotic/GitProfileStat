@@ -50,6 +50,17 @@ The API utilizes `tsyringe` for inversion of control, allowing seamless switchin
 | `ResponseCache` | `UpstashResponseCache` | `InMemoryResponseCache` |
 | `SessionService` | `SessionService` (Singleton) | `SessionService` (Singleton) |
 
+## Caching Strategy & Rate Protection
+
+To shield downstream GitHub GraphQL and REST endpoints from exhaustion:
+
+1. **Cache Middleware (`cacheMiddleware.ts`)**:
+   - Generates deterministic cache keys based on normalized request paths and query parameters.
+   - Emits HTTP `Cache-Control: public, max-age=300, s-maxage=300, stale-while-revalidate=60` headers.
+2. **Cache Adapter Hierarchy**:
+   - **Upstash Redis**: Distributed caching with automatic TTL eviction for multi-instance deployments.
+   - **In-Memory Cache**: In-process store used automatically when Redis environment variables are absent.
+
 ## Documentation
 
 See the root [README.md](../../README.md) and [DEPLOYMENT.md](../../DEPLOYMENT.md) for full deployment instructions, parameters, and customization guides.
