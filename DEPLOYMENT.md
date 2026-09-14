@@ -280,11 +280,12 @@ pnpm dev
 4. **Root Directory**: set to `apps/web`.
 5. **Framework Preset**: Vercel should auto‑detect **Next.js**; leave as is.
 6. **Build Settings** – defaults are fine (`pnpm install` then `pnpm build`).
-7. **Environment Variables** – click **Edit** and add each `NEXT_PUBLIC_*` variable:
-   - `NEXT_PUBLIC_API_URL`
-   - `NEXT_PUBLIC_GITHUB_CLIENT_ID`
-   - `NEXT_PUBLIC_*` others if any.
-   - Click **Add** after each entry.
+7. **Environment Variables** – Click **Edit** and configure:
+   - `NEXT_PUBLIC_API_URL`: The backend API URL (e.g., `https://gitprofilestats.duckdns.org` or `https://<your-render-service>.onrender.com`).
+   - `NEXT_PUBLIC_GITHUB_CLIENT_ID`: The GitHub OAuth App Client ID.
+   - `NEXT_PUBLIC_APP_URL`: Production Vercel URL (e.g., `https://git-profile-stats-web.vercel.app`).
+   > [!IMPORTANT]
+   > Do NOT include a trailing slash on `NEXT_PUBLIC_API_URL`. The client auth module automatically appends `Authorization: Bearer <token>` to all requests to this URL for reliable cross-origin authentication.
 8. Click **Deploy**.
 9. After deployment, Vercel shows a preview URL like `https://gitprofilestats.vercel.app`. Click **Visit** to open it.
 
