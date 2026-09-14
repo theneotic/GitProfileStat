@@ -23,6 +23,21 @@ pnpm build
 pnpm test
 ```
 
+## SVG Card Generators
+
+The SVG engine generates self-contained vector graphics using pure TypeScript string templates without external canvas dependencies:
+
+| Generator | Endpoint | Description |
+| --------- | -------- | ----------- |
+| `profileCard` | `/cards/profile.svg` | User identity card with avatar, bio, follower count, and primary stats |
+| `statsCard` | `/cards/stats.svg` | Contribution overview (commits, PRs, issues) with algorithmic ranking grade |
+| `languagesCard` | `/cards/languages.svg` | Top languages breakdown with percentage bars and GitHub-accurate color mapping |
+| `streakCard` | `/cards/streak.svg` | Current streak, longest streak, and total contribution days |
+| `repositoryCard` | `/cards/repository.svg` | Deep repository card with stars, forks, issues, and language stats |
+| `rankingsCard` | `/cards/rankings.svg` | Percentile standing and developer ranking badge |
+| `topContributedCard` | `/cards/top-contributed.svg` | Highlighted external repositories and open-source contributions |
+| `trophiesCard` | `/cards/trophies.svg` | Milestone badges and achievement trophies |
+
 ## Documentation
 
-See the global [API Documentation](../../API.md) in the project root for full endpoints, parameters, error schemas, and customization guides.
+See the root [README.md](../../README.md) and [DEPLOYMENT.md](../../DEPLOYMENT.md) for full deployment instructions, parameters, and customization guides.
