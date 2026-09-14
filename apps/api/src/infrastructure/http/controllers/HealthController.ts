@@ -36,6 +36,7 @@ export class HealthController {
 
       res.status(200).json({
         status: isSystemOk ? 'ok' : 'degraded',
+        version: '1.0.1',
         uptime: process.uptime(),
         timestamp: new Date().toISOString(),
         environment: env.NODE_ENV,
