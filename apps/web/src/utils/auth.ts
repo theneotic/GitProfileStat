@@ -7,6 +7,7 @@ export const TOKEN_STORAGE_KEY = 'gitprofilestats_token';
 
 /**
  * Retrieve the active authentication token from localStorage or first-party cookie.
+ * @returns The active JWT bearer token string, or null if unauthenticated.
  */
 export function getStoredToken(): string | null {
   if (typeof window === 'undefined') {
@@ -44,6 +45,7 @@ export function getStoredToken(): string | null {
 
 /**
  * Store the authentication token in localStorage and a first-party cookie.
+ * @param token - Clean JWT session token string received from backend OAuth redirect.
  */
 export function setStoredToken(token: string): void {
   if (typeof window === 'undefined' || !token) {
@@ -93,6 +95,8 @@ export function clearStoredToken(): void {
 
 /**
  * Merge existing request headers with Authorization Bearer header if token exists.
+ * @param extraHeaders - Optional incoming HeadersInit headers to merge.
+ * @returns Headers record containing Authorization header if token is present.
  */
 export function getAuthHeaders(extraHeaders: HeadersInit = {}): Record<string, string> {
   const headers: Record<string, string> = {};
@@ -121,6 +125,9 @@ export function getAuthHeaders(extraHeaders: HeadersInit = {}): Record<string, s
 
 /**
  * Wrapper around standard fetch to attach credentials and Bearer token automatically.
+ * @param input - Target RequestInfo or URL.
+ * @param init - Request initialization options.
+ * @returns Promise resolving to the HTTP Response.
  */
 export async function fetchWithAuth(
   input: RequestInfo | URL,
