@@ -85,6 +85,10 @@ export const validateRepositoryRequest = (
   }
 
   const githubAccessToken = (req as IRepositoryRequest).githubAccessToken;
-  (req as IRepositoryRequest).repoParams = { ...result.data, githubAccessToken };
+  (req as IRepositoryRequest).repoParams = {
+    owner: result.data.owner,
+    repo: result.data.repo,
+    githubAccessToken,
+  };
   next();
 };
