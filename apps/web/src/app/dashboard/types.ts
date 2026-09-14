@@ -1,3 +1,6 @@
+/**
+ * Individual repository metrics used in highlight cards and rankings.
+ */
 export interface RankedRepository {
   id: number;
   name: string;
@@ -11,6 +14,9 @@ export interface RankedRepository {
   updatedAt: string;
 }
 
+/**
+ * Aggregated statistics across all repositories owned or contributed to by the user.
+ */
 export interface RepositoryStats {
   total: number;
   public: number;
@@ -25,6 +31,9 @@ export interface RepositoryStats {
   openIssuesCount: number;
 }
 
+/**
+ * Categorical rankings mapping repositories to standout achievements.
+ */
 export interface RepositoryRankings {
   mostStarred: RankedRepository | null;
   mostForked: RankedRepository | null;
@@ -35,6 +44,9 @@ export interface RepositoryRankings {
   mostRecentlyUpdated: RankedRepository | null;
 }
 
+/**
+ * Language usage metrics derived from source byte totals.
+ */
 export interface LanguageStat {
   language: string;
   bytes: number;
@@ -42,6 +54,9 @@ export interface LanguageStat {
   repositoryCount: number;
 }
 
+/**
+ * Temporal breakdown of user commits across recent time windows.
+ */
 export interface CommitStats {
   username: string;
   totalCommits: number;
