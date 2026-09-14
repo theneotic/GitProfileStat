@@ -252,14 +252,25 @@ pnpm dev
 1. Go to https://render.com and **Log In**.
 2. Click **New → Web Service** (top‑right button).
 3. **Connect to GitHub** – choose _GitHub_ as the source and click **Connect**.
-4. Select the repository `GitProfileStats`.
+4. Select the repository `GitProfileStat`.
 5. **Root Directory**: type `apps/api`.
 6. **Name**: (optional) `gitprofilestats-backend`.
 7. **Environment**: `Node`.
 8. **Build Command**: `pnpm install && pnpm build`.
-9. **Start Command**: `pnpm start` (or the script defined in `package.json`).
-10. **Environment Variables**: Click **Add Environment Variable** for each of the backend variables (`DATABASE_URL`, `UPSTASH_REDIS_URL`, `GITHUB_CLIENT_SECRET`, `SESSION_SECRET`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`). Paste the exact values you saved earlier.
-11. **Health Check Path**: Enter `/api/health`.
+9. **Start Command**: `pnpm start` (or `node dist/main.js`).
+10. **Environment Variables**: Click **Add Environment Variable** for each backend variable:
+    - `GITHUB_CLIENT_ID`: GitHub OAuth Client ID
+    - `GITHUB_CLIENT_SECRET`: GitHub OAuth Client Secret
+    - `GITHUB_CALLBACK_URL`: `https://<your-render-service>.onrender.com/auth/github/callback`
+    - `WEB_BASE_URL`: `https://git-profile-stats-web.vercel.app` (frontend domain for CORS and OAuth redirect)
+    - `JWT_SECRET`: Random 64-character secret for signing session JWTs
+    - `COOKIE_SECRET`: Random 64-character secret for cookies
+    - `DATABASE_URL`: Neon PostgreSQL connection string (`postgresql://...`)
+    - `UPSTASH_REDIS_REST_URL`: Upstash REST URL (`https://...upstash.io`)
+    - `UPSTASH_REDIS_REST_TOKEN`: Upstash REST token
+    - `NODE_ENV`: `production`
+    - `PORT`: `4000`
+11. **Health Check Path**: Enter `/health`.
 12. **Cron Job (keep‑alive)**:
     - Go to the **Jobs** tab → **New Job**.
     - Name: `keep-alive`.
