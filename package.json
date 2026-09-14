@@ -32,7 +32,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "clean": "turbo run clean && rimraf node_modules",
-    "prepare": "husky"
+    "prepare": "node -e \"try { require('child_process').execSync('husky', {stdio: 'inherit'}) } catch {}\""
   },
   "devDependencies": {
     "turbo": "^2.5.0",
