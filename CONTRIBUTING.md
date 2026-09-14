@@ -10,8 +10,8 @@ We welcome contributions! This guide will help you get started and ensure a smoo
    - Click the **Fork** button at the top‑right of the repository page.
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/<your‑username>/GitProfileStats.git
-   cd GitProfileStats
+   git clone https://github.com/<your-username>/GitProfileStat.git
+   cd GitProfileStat
    ```
 3. **Install dependencies**
    - This project uses **pnpm**. If you don't have it installed:
@@ -76,7 +76,7 @@ We welcome contributions! This guide will help you get started and ensure a smoo
    ```bash
    git push origin feature/your-feature-name
    ```
-2. **Open a Pull Request** against the `main` branch of the upstream repository.
+2. **Open a Pull Request** against the `main` branch of [theneotic/GitProfileStat](https://github.com/theneotic/GitProfileStat).
 3. **PR Description** should include:
    - A clear summary of the change.
    - Related issue numbers (e.g., `Closes #42`).
